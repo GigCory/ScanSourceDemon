@@ -85,6 +85,7 @@
 							<div class="form-group">
 								<asp:Label ID="CustomerEmailLabel" runat="server" Text="Email" CssClass="form-label"></asp:Label>
 								<asp:TextBox ID="CustomerEmail" runat="server" CssClass="form-control"></asp:TextBox>
+								<asp:RegularExpressionValidator ID="RegularExpressionValidator2" ForeColor="Red" runat="server" ErrorMessage="Ivalid Email address" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="CustomerEmail"></asp:RegularExpressionValidator>
 							</div>
 
 							<div class="form-group">
@@ -105,11 +106,12 @@
 							<div class="form-group">
 								<asp:Label ID="CustomerZipLabel" runat="server" Text="Postal/Zip Code" CssClass="form-label"></asp:Label>
 								<asp:TextBox ID="CustomerZip" runat="server" CssClass="form-control"></asp:TextBox>
+								<asp:RegularExpressionValidator ID="RegularExpressionValidator1" ForeColor="Red" runat="server" ErrorMessage="Ivalid ZIP Code" ValidationExpression="^\d{5}(?:[-\s]\d{4})?$" ControlToValidate="CustomerZip"></asp:RegularExpressionValidator>
 							</div>
 
 							<div class="form-group">
 								<asp:Label ID="CustomerCountryLabel" runat="server" Text="Country" CssClass="form-label"></asp:Label>
-								<asp:DropDownList ID="CountryDropDownList" runat="server" CssClass="form-control"/>
+								<asp:DropDownList ID="CountryDropDownList" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="CountryDropDownList_SelectedIndexChanged"/>
 							</div>
 
 							<div class="form-group">

@@ -5,8 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using assessment_platform_developer.Services;
+
 using Container = SimpleInjector.Container;
+using assessment_platform_developer.Commands;
 
 namespace assessment_platform_developer
 {
@@ -19,7 +20,7 @@ namespace assessment_platform_developer
 			if (!IsPostBack)
 			{
 				var testContainer = (Container)HttpContext.Current.Application["DIContainer"];
-				var customerService = testContainer.GetInstance<ICustomerService>();
+				var customerService = testContainer.GetInstance<ICustomerQuery>();
 
 				var allCustomers = customerService.GetAllCustomers();
 				ViewState["Customers"] = allCustomers;
@@ -35,8 +36,9 @@ namespace assessment_platform_developer
 
 		private void PopulateCustomerDropDownLists()
 		{
-
-			var countryList = Enum.GetValues(typeof(Countries))
+			if (!IsPostBack)
+			{
+				var countryList = Enum.GetValues(typeof(Countries))
 				.Cast<Countries>()
 				.Select(c => new ListItem
 				{
@@ -44,25 +46,51 @@ namespace assessment_platform_developer
 					Value = ((int)c).ToString()
 				})
 				.ToArray();
+				CountryDropDownList.Items.Clear();
 
-			CountryDropDownList.Items.AddRange(countryList);
-			CountryDropDownList.SelectedValue = ((int)Countries.Canada).ToString();
+				CountryDropDownList.Items.AddRange(countryList);
+
+				//CountryDropDownList.SelectedValue = ((int)Countries.Canada).ToString();
 
 
-			var provinceList = Enum.GetValues(typeof(CanadianProvinces))
-				.Cast<CanadianProvinces>()
-				.Select(p => new ListItem
-				{
-					Text = p.ToString(),
-					Value = ((int)p).ToString()
-				})
-				.ToArray();
+				var provinceList = Enum.GetValues(typeof(CanadianProvinces))
+					.Cast<CanadianProvinces>()
+					.Select(p => new ListItem
+					{
+						Text = p.ToString(),
+						Value = ((int)p).ToString()
+					})
+					.ToArray();
 
-			StateDropDownList.Items.Add(new ListItem(""));
-			StateDropDownList.Items.AddRange(provinceList);
+				//StateDropDownList.Items.Add(new ListItem(""));
+				StateDropDownList.Items.Clear();
+
+				StateDropDownList.Items.AddRange(provinceList);
+			}
 		}
+        protected void CountryDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-		protected void PopulateCustomerListBox()
+
+            Province province=new Province();
+   
+            var provinceList = province.ProvinceList(CountryDropDownList.SelectedIndex)
+                .Select(p => new ListItem
+                {
+                    Text = p.ProvinceName.ToString(),
+                    Value = p.ProvinceName.ToString()
+                })
+                .ToArray();
+			//StateDropDownList.Items.Add(new ListItem(""));
+			StateDropDownList.Items.Clear();
+        StateDropDownList.Items.AddRange(provinceList);
+			
+
+
+
+            
+        }
+        protected void PopulateCustomerListBox()
 		{
 			CustomersDDL.Items.Clear();
 			var storedCustomers = customers.Select(c => new ListItem(c.Name)).ToArray();
@@ -95,7 +123,7 @@ namespace assessment_platform_developer
 			};
 
 			var testContainer = (Container)HttpContext.Current.Application["DIContainer"];
-			var customerService = testContainer.GetInstance<ICustomerService>();
+			var customerService = testContainer.GetInstance<ICustomerCommand>();
 			customerService.AddCustomer(customer);
 			customers.Add(customer);
 
