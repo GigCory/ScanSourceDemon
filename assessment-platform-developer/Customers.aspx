@@ -105,8 +105,8 @@
 
 							<div class="form-group">
 								<asp:Label ID="CustomerZipLabel" runat="server" Text="Postal/Zip Code" CssClass="form-label"></asp:Label>
-								<asp:TextBox ID="CustomerZip" runat="server" CssClass="form-control"></asp:TextBox>
-								<asp:RegularExpressionValidator ID="RegularExpressionValidator1" ForeColor="Red" runat="server" ErrorMessage="Ivalid ZIP Code" ValidationExpression="^\d{5}(?:[-\s]\d{4})?$" ControlToValidate="CustomerZip"></asp:RegularExpressionValidator>
+								<asp:TextBox ID="CustomerZip" runat="server" CssClass="form-control" ></asp:TextBox>
+								<asp:RegularExpressionValidator ID="RegularExpressionValidator1" ForeColor="Red" runat="server" ErrorMessage="Ivalid ZIP Code" ValidationExpression="^((\d{5}-\d{4})|(\d{5})|([A-Z]\d[A-Z]\s\d[A-Z]\d))$" ControlToValidate="CustomerZip"></asp:RegularExpressionValidator>
 							</div>
 
 							<div class="form-group">
