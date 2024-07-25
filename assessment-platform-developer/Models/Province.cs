@@ -37,7 +37,6 @@ namespace assessment_platform_developer.Models
             return provinces;
         }
     }
-
     public enum USStates
     {
         Alabama,
@@ -101,7 +100,6 @@ namespace assessment_platform_developer.Models
         Wisconsin,
         Wyoming
     }
-
     public enum CanadianProvinces
     {
         Alberta,

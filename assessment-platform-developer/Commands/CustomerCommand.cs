@@ -7,31 +7,24 @@ using assessment_platform_developer.Repositories;
 
 namespace assessment_platform_developer.Commands
 {
-    //public class CustomerCommand
-    //{
-    //}
     public interface ICustomerCommand
     {
-        void AddCustomer(Customer customer);
-        void UpdateCustomer(Customer customer);
+        void AddCustomer(CustomerCommandDTO customer);
+        void UpdateCustomer(CustomerCommandDTO customer);
         void DeleteCustomer(int id);
     }
-
     public class CustomerCommand : ICustomerCommand
     {
         private readonly ICustomerCommandRepository _customerCommandRepository;
-
         public CustomerCommand(ICustomerCommandRepository customerCommandRepository)
         {
             _customerCommandRepository = customerCommandRepository;
         }
-
-        public void AddCustomer(Customer customer)
+        public void AddCustomer(CustomerCommandDTO customer)
         {
             _customerCommandRepository.Add(customer);
         }
-
-        public void UpdateCustomer(Customer customer)
+        public void UpdateCustomer(CustomerCommandDTO customer)
         {
             _customerCommandRepository.Update(customer);
         }

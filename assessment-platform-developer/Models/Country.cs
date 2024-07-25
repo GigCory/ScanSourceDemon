@@ -28,7 +28,6 @@ namespace assessment_platform_developer.Models
             return countries;
         }
     }
-
     public enum Countries
     {
         Canada,
