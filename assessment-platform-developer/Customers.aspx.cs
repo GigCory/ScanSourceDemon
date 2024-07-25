@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 
 using Container = SimpleInjector.Container;
 using assessment_platform_developer.Commands;
+using System.Text.RegularExpressions;
 
 namespace assessment_platform_developer
 {
@@ -90,6 +91,35 @@ namespace assessment_platform_developer
 
             
         }
+
+//        protected void CustomerZip_TextChanged(object sender, EventArgs e)
+//        {
+			
+//				if(CountryDropDownList.SelectedValue== "1")
+//			{
+//				Match match = Regex.Match(CustomerZip.Text, "^\\d{5}(?:[-\\s]\\d{4})?$");
+//				if(!match.Success)
+//				{
+//RegularExpressionValidator1.ErrorMessage = "Invalid US Zip Code";
+//				}
+//			}
+//			else if (CountryDropDownList.SelectedValue== "0")
+//			{
+//                Match match = Regex.Match(CustomerZip.Text, "^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$");
+//                if (!match.Success)
+//                {
+//                    RegularExpressionValidator1.ErrorMessage = "Invalid CANADA Zip Code";
+//                }
+//            }
+
+
+
+
+
+
+
+
+//        }
         protected void PopulateCustomerListBox()
 		{
 			CustomersDDL.Items.Clear();
