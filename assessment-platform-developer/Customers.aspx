@@ -90,7 +90,8 @@
 
 							<div class="form-group">
 								<asp:Label ID="CustomerPhoneLabel" runat="server" Text="Phone" CssClass="form-label"></asp:Label>
-								<asp:TextBox ID="CustomerPhone" runat="server" CssClass="form-control"></asp:TextBox>
+								<asp:TextBox ID="CustomerPhone" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="CustomerPhone_OnTextChanged"></asp:TextBox>
+							<asp:RegularExpressionValidator ID="RegularExpressionValidatorCustomerPhone" ForeColor="Red" runat="server" ErrorMessage="" ControlToValidate="CustomerZip"></asp:RegularExpressionValidator>
 							</div>
 
 							<div class="form-group">

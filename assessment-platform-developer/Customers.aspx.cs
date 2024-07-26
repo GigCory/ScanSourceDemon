@@ -84,7 +84,7 @@ namespace assessment_platform_developer
 			StateDropDownList.Items.Clear();
 			StateDropDownList.Items.AddRange(provinceList);
 		}
-        protected void PopulateCustomerListBox()
+		protected void PopulateCustomerListBox()
 		{
 			CustomersDDL.Items.Clear();
 			var storedCustomers = customersQuery.Select(c => new ListItem(c.Name)).ToArray();
