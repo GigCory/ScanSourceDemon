@@ -60,12 +60,9 @@ namespace assessment_platform_developer
 
 		void Application_Start(object sender, EventArgs e)
 		{
-
 			// Code that runs on application startup
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-
 			Bootstrap();
 		}
 
@@ -73,12 +70,8 @@ namespace assessment_platform_developer
 		{
 			// 1. Create a new Simple Injector container.
 			var container = new Container();
-
 			container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
-
 			// 2. Configure the container (register)
-			//container.Register<QueryDBContext>(Lifestyle.Scoped);
-   //         container.Register<CommandDBContext>(Lifestyle.Scoped);
             container.Register<ICustomerCommandRepository, CustomerCommandRepository>(Lifestyle.Scoped);
             container.Register<ICustomerQueryRepository, CustomerQueryRepository>(Lifestyle.Scoped);
             container.Register<ICustomerCommand, CustomerCommand>(Lifestyle.Scoped);
@@ -86,12 +79,10 @@ namespace assessment_platform_developer
             // Register your Page classes to allow them to be verified and diagnosed.
             RegisterWebPages(container);
 			container.Options.ResolveUnregisteredConcreteTypes = true;
-
 			// 3. Store the container for use by Page classes.
 			Global.container = container;
 			// 3. Verify the container's configuration.
 			container.Verify();
-
 			HttpContext.Current.Application["DIContainer"] = container;
 		}
 
